@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <script type="text/javascript" src="{% static 'echarts-5.3.3/dist/echarts.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/china.js' %}"></script>
+    <div class="container">
+        <div class="col-md-12">
+            <div id="main" style="width: 100%;height: 800px" ></div>
+        </div>
+    </div>
+    <script>
+        // 2.初始化echarts实例
+        let myEcharts = echarts.init(document.getElementById("main"));
+        //3.设置配置项和数据
+        let option = {
+            title: {  //标题样式
+                text: '中国地图',
+                x: "center",
+                textStyle: {
+                    fontSize: 18,
+                    color: "skyblue"
+                },
+            },
+            tooltip: {  //这里设置提示框
+                trigger: 'item',  //数据项图形触发
+                backgroundColor: "skyblue",  //提示框浮层的背景颜色。
+                //字符串模板(地图): {a}（系列名称），{b}（区域名称），{c}（合并数值）,{d}（无）
+                formatter: '地区：{b}<br/>数据：{c}',
+                extraCssText: 'width:120px;height:60px;'
+            },
+            visualMap: {//视觉映射组件
+                top: 'center',
+                left: 'left',
+                min: 10,
+                max: 500000,
+                text: ['High', 'Low'],
+                realtime: false,
+                calculable: true,
+                inRange: {
+                    color: ['lightskyblue', 'yellow', 'orangered']
+                }
+            },
+            series: [
+                {
+                    name: '模拟数据',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,
+                    center: ['50%', '50%'],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                textStyle: {
+                                    color: "black"
+                                }
+                            }
+                        },
+                        zoom: 1.5,
+                        emphasis: {
+                            label: {show: true}
+                        }
+                    },
+                    top: "3%",//组件距离容器的距离
+                    data: [
+                        {name: '北京', value: 'xx'},
+                        {name: '天津', value: 'xx'},
+                        {name: '上海', value: 'xx'},
+                        {name: '重庆', value: 'xx'},
+                        {name: '河北', value: 'xx'},
+                        {name: '河南', value: 'xx'},
+                        {name: '云南', value: 'xx'},
+                        {name: '辽宁', value: 'xx'},
+                        {name: '黑龙江', value: 'xx'},
+                        {name: '湖南', value: 'xx'},
+                        {name: '安徽', value: 'xx'},
+                        {name: '山东', value: 'xx'},
+                        {name: '新疆', value: 'xx'},
+                        {name: '江苏', value: 'xx'},
+                        {name: '浙江', value: 'xx'},
+                        {name: '江西', value: 'xx'},
+                        {name: '湖北', value: 'xx'},
+                        {name: '广西', value: 'xx'},
+                        {name: '甘肃', value: 'xx'},
+                        {name: '山西', value: 'xx'},
+                        {name: '内蒙古', value: 'xx'},
+                        {name: '陕西', value: 'xx'},
+                        {name: '吉林', value: 'xx'},
+                        {name: '福建', value: 'xx'},
+                        {name: '贵州', value: 'xx'},
+                        {name: '广东', value: 'xx'},
+                        {name: '青海', value: 'xx'},
+                        {name: '西藏', value: 'xx'},
+                        {name: '四川', value: 'xx'},
+                        {name: '宁夏', value: 'xx'},
+                        {name: '海南', value: 'xx'},
+                        {name: '台湾', value: 'xx'},
+                        {name: '香港', value: 'xx'},
+                        {name: '澳门', value: 'xx'}
+                    ]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myEcharts.setOption(option);
+        window.onresize = function () {
+            myEcharts.resize();
+        }
+    </script>
+
+{% endblock %}

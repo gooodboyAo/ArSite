@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/file/upload/">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                上传文件
+            </a>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 文件列表</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>文件名</th>
+                        <th>上传时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in file_list %}
+                        <tr>
+                            <th scope="row">{{ obj.id }}</th>
+                            <td>{{ obj.file_name }}</td>
+                            <td>{{ obj.upload_time }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="/file/{{ obj.id }}/download/">下载</a>
+                                <a class="btn btn-danger btn-xs" href="/file/{{ obj.id }}/delete/">删除</a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

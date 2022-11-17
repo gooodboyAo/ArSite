@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/microservices/add/">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                新建服务
+            </a>
+            {#搜索框#}
+            <div style="float: right; width: 300px;">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="gs" placeholder={{ search_data }}>
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 服务列表</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>服务名称</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in data.values %}
+                        <tr>
+                            <td>{{ obj.0 }}</td>
+                            <td>{{ obj.1 }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="/microservices/{{ obj.0 }}/start/">启动</a>
+                                <a class="btn btn-danger btn-xs" href="#">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

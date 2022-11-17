@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div style="margin-bottom: 10px">
+        <a class="btn btn-success" href="/goodnumber/add/">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            新建靓号
+        </a>
+        {#搜索框#}
+        <div style="float: right; width: 300px;">
+            <form method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="gs" placeholder={{ search_data }}>
+                    <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 靓号列表</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>手机号</th>
+                    <th>价格</th>
+                    <th>账号等级</th>
+                    <th>账号状态</th>
+                    <th>操作</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in number_info %}
+                <tr>
+
+                    <th scope="row">{{ obj.id }}</th>
+                    <td>{{ obj.mobile }}</td>
+                    <td>{{ obj.price }}</td>
+                    <td>{{ obj.get_level_display }}</td>
+                    <td>{{ obj.get_status_display }}</td>
+
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="/goodnumber/{{ obj.id }}/edit/">编辑</a>
+                        <a class="btn btn-danger btn-xs" href="/goodnumber/{{ obj.id }}/delete/">删除</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                </a>
+            </li>
+            {{ page_str }}
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}

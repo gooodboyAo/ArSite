@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录验证码</title>
+</head>
+<script src="{% static 'js/jquery-1.8.2.min.js' %}" type="text/javascript"></script>
+
+<body>
+验证码图片：{{ captcha_form.captcha }}
+</body>
+
+<!--ajax动态更新验证码-->
+<script type="text/javascript">
+    $('.captcha').click(function () {
+        $.getJSON("captcha/refresh/", function (result) {
+            $('.captcha').attr('src', result['image_url']);
+            $('#id_captcha_0').val(result['key'])
+        });
+    });
+
+</script>
+</html>

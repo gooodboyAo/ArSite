@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>登陆</title>
+    <link rel="stylesheet" type="text/css" href='{% static 'css/homepage.css' %}'>
+    <script type="text/javascript" src='{% static 'js/jquery-1.8.2.min.js' %}'></script>
+    <script type="text/javascript" src='{% static 'js/re_main.js' %}'></script>
+</head>
+<body style=" background:#fbfbfb;padding-top:100px;
+    ">
+<div class="bfb tc"><img src='{% static 'img/logo123.png' %}'></div>
+<div class="bfb tc login_text">即刻开启智慧自动化流程！</div>
+<form id="loginForm" action="" method="POST" role="form">
+    {% csrf_token %}
+    <div class="login_page">
+        <div class="bfb tc pst">
+            <input style="border-radius:4px 4px 0 0;width:100%;margin:0;height:45px;padding:10px 8px"
+                   class="form-control login_line" name="loginInfo.nick" onFocus="clearInvalidLogin('nick')"
+                   id="nickLogin" type="text" placeholder="账户" onKeyUp="enterLogin(event);">
+            <div class="login_prompt fs14" id="nickMsg" style="display:none;"
+                 onclick="clearInvalidLogin('nick')"></div>
+        </div>
+        <div class="bfb tc pst">
+            <input style="border-radius:0 0 4px 4px;width:100%;margin:0;height:45px;padding:10px 8px"
+                   class="form-control" name="loginInfo.password" onFocus="clearInvalidLogin('password')"
+                   id="passwordLogin" type="password" placeholder="密码" onKeyUp="enterLogin(event);">
+            <div class="login_prompt fs14" id="passwordMsg" style="display:none;"
+                 onclick="clearInvalidLogin('password')"></div>
+        </div>
+        <div style="display: flex;height: 70px;justify-content: center;align-items: center">
+            <input name="vcode" type="text" placeholder="请输入验证码" class="form-control" id="vcode"
+                   style="text-align:center;border-radius:4px 4px 4px 4px;width:50%;margin:0;height:45px;padding:5px 4px">
+            <input name="hashkey" type="hidden" value="{{ hashkey }}">
+            <div style="width: 60px;height: 45px;">
+                <img name="code" id="code" src="{{ imgage_url }}" width="90" height="45" title="点击刷新验证码">
+            </div>
+
+        </div>
+        <div class="bfb tc">
+            <button type="submit" class="btn btn-primary login_signin" id="login_btn">
+                立即登录
+            </button>
+        </div>
+        <p style="color: red">{{ message }}</p>
+        <div class="bfb tc lh30 fs14 cl4 login_page_input">
+            <div class="fl"></div>
+            <div class="fr"><a href='#'>忘记密码？</a></div>
+        </div>
+
+        <div class="bfb tc">
+            <button type="button" class="btn btn-primary login_registered" id='register_btn' onclick="tranceform()">
+                注册账号
+            </button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+
+</script>
+<div class="bfb tc fs14 login_footer">RanAo \ Copyright ©2022. All Rights Reserved.</div>
+</body>
+</html>

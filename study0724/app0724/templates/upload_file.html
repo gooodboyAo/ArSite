@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <form class="am-form am-form-horizontal" action="/file/upload/" method="post" style="padding-top: 30px;"
+              enctype="multipart/form-data">
+            {% csrf_token %}{{ form.as_p }}
+            <input value="504" name="roleId" type="hidden">
+            <div class="am-form-group">
+                <label for="rep-no" class="am-u-sm-3 am-form-label">
+                    选择文件
+                </label>
+                <div class="am-u-sm-9" style="width: 500px">
+                    <input id="file_name" required="" placeholder="" value="{{ file_name }}" name="file_name"
+                           type="file" style="width: 400px">
+                </div>
+            </div>
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-push-3">
+                    <button id="addRole" class="am-btn am-btn-success" type="submit">上传</button>
+                    <div>
+                        <p style="color: red;"> {{ message.title }}</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
